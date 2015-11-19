@@ -1,0 +1,181 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Vance Turnewitsch}
+\linespread{1.5}
+\begin{document}
+Find the general solution for
+
+$x'=ax(1-{x\over N}) -h$
+
+We expand to get: $dx/dt = ax-a/Nx^2 -h$ and further...
+
+$1/(-a/Nx^2+ax-h)dx = dt$ 
+
+$1/(a/Nx^2-ax+h)dx= -dt$ and integrating...
+
+$\int(1/(a/Nx^2-ax+h))dx =-\int dt$
+
+$\int(1/(a/Nx^2-ax +h)dx = c-t$ where the negative is absorbed into $c$
+
+We decide to pull the $a/N$ out of the bottom to get:
+
+$\int[{1\over(a/N(x^2-Nx+Nh/a)}]dx=c-t$
+
+${N\over a}\int[1/(x^2-Nx+{Nh\over a})]dx=c-t$
+
+$\int[1/(x^2-Nx+{Nh\over a})]dx={a\over N}(c-t)$
+
+Now observe we have a quadratic polynomial on the denominator in the left-hand integral. We know we can find solutions of:
+
+$x={N\pm\sqrt{N^2-4{Nh\over a}}\over 2}$
+
+We let: $f={N+\sqrt{N^2-4{Nh\over a}}\over 2}$ and $g={N-\sqrt{N^2-4{Nh\over a}}\over 2}$
+
+\section{Real Solutions}
+We now assume that: $N^2-4{Nh\over a}>0$ thus $f,g$ are real.
+
+We can factor our left integral into:
+
+$\int({1\over (x+f)(x+g)})dx=a/N(c-t)$
+
+We now proceed to use partial fractions on the left integrand:
+
+${1\over (x+f)(x+g)}=A/(x+f) + B/(x+g)$ and expanding we get:
+
+$1 = A(x+g) + B(x+f) \Longrightarrow 1=Ax+Ag + Bx+Bf \Longrightarrow 1=x(A+B) + Ag + Bf$
+
+We observe this can be represented as a matrix equation:
+
+$\left[\begin{array}{ccc}
+x & x \\
+g & f \\
+\end{array}\right]
+\left[\begin{array}{c}
+A\\
+B\\\end{array}\right]=
+\left[\begin{array}{c}
+0 \\
+1 \\
+\end{array}\right]
+$  and we multiply by the inverse to get:
+
+
+$\left[\begin{array}{c}
+A\\
+B\\\end{array}\right]={1\over x(f-g)}
+\left[\begin{array}{cc}
+f & -x \\
+-g & x \\
+\end{array}\right]
+\left[\begin{array}{c}
+0 \\
+1 \\
+\end{array}\right]=
+{1\over x(f-g)}
+\left[\begin{array}{c}
+-x \\
+x \\
+\end{array}\right]=
+{1\over f-g}
+\left[\begin{array}{c}
+-1 \\
+1 \\
+\end{array}\right]
+$
+
+We thus find that: $A=-1/(f-g)$ and $B=1/(f-g)$
+
+Our integral now becomes:
+
+$\int{-1/(f-g)\over x+f}+{1/(f-g)\over x+g}dx=a/N(c-t)$
+
+${1\over f-g}[\int{1\over x+g}dx - \int{1\over x+f}dx]=a/N(c-t)$
+
+$\ln{|x+g|}-\ln{|x+f|}=(f-g)a/N(c-t)$
+
+$\ln|{x+g\over x+f}|=(f-g)a/N(c-t)$ and placing both sides in base $e$
+
+$|(x+g)/(x+f)|=e^{(f-g)a/N(c-t)}$
+
+$(x+g)/(x+f)=Ke^{(f-g)a/N(c-t)}$ where we have allowed $K$ to absorb the $\pm1$ from the absolute value.
+
+$x+g = (x+f)Ke^{(f-g)a/N(c-t)}$ 
+
+We are going to let: $B=Ke^{(f-g)a/N(c-t)}$ as we simplify.
+
+$x=xB+fB -g$
+
+$x-xB = fB-g$
+
+$x(1-B) = fB-g$
+
+$x = (fB-g)/(1-B)$
+
+We now simplify by first substituting in values for $f$ and $g$
+
+$x=(({N+\sqrt{N^2-4{Nh\over a}}\over 2})B-{N-\sqrt{N^2-4{Nh\over a}}\over 2})/(1-B)$
+
+$x=[(N+\sqrt{N^2-4{Nh\over a}})B-N+\sqrt{N^2-4{Nh\over a}}]/[2(1-B)]$
+
+Now let's work on the $B=Ke^{(f-g)a/N(c-t)}$
+
+We first observe that: $f-g={N+\sqrt{N^2-4{Nh\over a}}\over 2}-{N-\sqrt{N^2-4{Nh\over a}}\over 2}=\sqrt{N^2-4{Nh\over a}}$
+
+Thus our: $B=Ke^{(\sqrt{N^2-4{Nh\over a}})a/N(c-t)}$
+
+We simplify: $(\sqrt{N^2-4{Nh\over a}})a/N(c-t)=\sqrt{a^2-{4ah\over N}}(c-t)$
+
+Our final solution is thus:
+
+$x(t)=[(N+\sqrt{N^2-4{Nh\over a}})(e^{\sqrt{a^2-{4ah\over N}}(c-t)})-N+\sqrt{N^2-4{Nh\over a}}]/[2(1-e^{\sqrt{a^2-{4ah\over N}}(c-t)})]$
+
+$x(t)=N[(1+\sqrt{1-4{h\over Na}})(e^{\sqrt{a^2-{4ah\over N}}(c-t)})-1+\sqrt{1-4{h\over Na}}]/[2(1-e^{\sqrt{a^2-{4ah\over N}}(c-t)})]$
+
+\section{Imaginary Solutions}
+
+We now proceed to work on: $N^2-4{Nh\over a}<0$ thus our $f,g$  are imaginary.
+
+There exists $m,n$ such that: $f=m+in$ and $g=m-in$ which allows us to simplify the left hand integral:
+
+$\int {1\over(x+f)(x+g)}dx=\int {1\over (x+m+in)(x+m-in)}dx=\int 1/(x^2+2mx+m^2+n^2)dx=\int 1/((x+m)^2+n^2)dx=\arctan[{(x+n)/n}]/n-c_2$
+
+Now we equate this with the right hand:
+
+$\arctan[{(x+m)/n}]/n=a/N(c-t)+c_2$
+
+$\arctan[(x+m)/n]=na/N(c-t)+c_3$ where $c_3=n*c_2$
+
+$(x+m)/n=\tan(na/N(c-t)+c_3)$
+
+$x+m = n\tan(na/N(c-t)+c_3)$
+
+$x=n\tan(na/N(c-t)+c_3)-m$
+
+We observe that $n$ is the real number on the imaginary part of $f,g$ which is: $\sqrt{N^2-4Nh/a}/2=\sqrt{N^2/4-Nh/a}$ 
+
+And that $m$ is ${1\over 2}$. This we substitute in:
+
+$x(t)=\sqrt{{N^2\over 4}-{Nh\over a}}\cdot \tan(\sqrt{{N^2\over 4}-{Nh\over a}}{a\over N}(c-t)+c_3)-{1\over 2}$
+
+$x(t)=\sqrt{{N^2\over 4}-{Nh\over a}}\cdot \tan(\sqrt{{a^2\over 4}-{ah\over N}}(c-t)+c_3)-{1\over 2}$
+
+\section{Final Solution}
+
+Our general solution is then:
+
+$x(t)=\begin{cases}
+N[(1+\sqrt{1-4{h\over Na}})(e^{\sqrt{a^2-{4ah\over N}}(c-t)})-1+\sqrt{1-4{h\over Na}}]/[2(1-e^{\sqrt{a^2-{4ah\over N}}(c-t)})] \textrm{ if } 1-{4h\over Na}>0\\
+
+\sqrt{{N^2\over 4}-{Nh\over a}}\cdot \tan(\sqrt{{a^2\over 4}-{ah\over N}}(c-t)+c_2)-{1\over 2} \textrm{ if } 1-{4h\over Na}<0 \\
+\end{cases}$
+
+where $c,c_2$ are constants to be determined. \\
+
+We now discuss the relationships of the constants $a,N,h$ and their effects on the solution. With a little rearranging of the conditional in the function above we see the solutions depend upon the relation of $Na$ to $4h$. The $a$ is the population growth and $N$ is the carrying capacity of the population. Finally, $h$ is the harvesting rate, of course. Thus we see that if the growth rate scaled by the carrying is larger than four times the harvesting rate, the population will grow to some defined number. Notice in the limit as $t\rightarrow \infty$ that the first piece of the solution converges to a fixed number.
+
+If the growth rate scaled by the carrying capacity is less than four times the harvesting rate, we enter a more periodic solution. 
+\end{document} 

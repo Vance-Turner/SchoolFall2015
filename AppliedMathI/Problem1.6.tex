@@ -1,0 +1,139 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[letterpaper, portrait, margin=0.5in]{geometry}
+\linespread{2}
+\usepackage{times}
+\author{Vance Turnewitsch}
+\begin{document}
+Find the general solution of: $x'=x(1-x)-h$\\
+
+We expand into: $x'=x-x^2-h$ and rearrange: $dx/dt=-x^2+x-h$. Now we manipulate to get:
+
+$1/(-x^2+x-h)dx = dt \Longrightarrow 1/(x^2-x+h)=-dt$ and we integrate: $\int(1/(x^2-x+h))dx=-\int dt$
+
+And we get: $\int(1/(x^2-x+h))dx=c-t$ where $c$ is some general constant.
+
+Now we consider the denominator in the left integral: $x^2-x+h$ which we observe has two solutions: $x={1\pm\sqrt{1-4h}\over 2}$ 
+
+Thus we can factor the fraction as follows: ${1\over x^2-x+h}={1\over (x+a)(x+b)}$ where $a={1+\sqrt{1-4h}\over 2}$ and $b={1-\sqrt{1-4h}\over 2}$ assuming that both $a,b$ are real here!
+
+
+We now have: $\int{1\over (x+a)(x+b)}dx=c-t$ We now proceed to use partial fractions on the left integrand:
+
+${1\over (x+a)(x+b)}=A/(x+a) + B/(x+b)$ and expanding we get:
+
+$1 = A(x+b) + B(x+a) \Longrightarrow 1=Ax+Ab + Bx+Ba \Longrightarrow 1=x(A+B) + Ab + Ba$
+
+We observe this can be represented as a matrix equation:
+
+$\left[\begin{array}{ccc}
+x & x \\
+b & a \\
+\end{array}\right]
+\left[\begin{array}{c}
+A\\
+B\\\end{array}\right]=
+\left[\begin{array}{c}
+0 \\
+1 \\
+\end{array}\right]
+$  and we multiply by the inverse to get:
+
+
+$\left[\begin{array}{c}
+A\\
+B\\\end{array}\right]={1\over x(a-b)}
+\left[\begin{array}{cc}
+a & -x \\
+-b & x \\
+\end{array}\right]
+\left[\begin{array}{c}
+0 \\
+1 \\
+\end{array}\right]=
+{1\over x(a-b)}
+\left[\begin{array}{c}
+-x \\
+x \\
+\end{array}\right]=
+{1\over a-b}
+\left[\begin{array}{c}
+-1 \\
+1 \\
+\end{array}\right]
+$
+
+We thus find that: $A=-1/(a-b)$ and $B=1/(a-b)$
+
+Our left integral is now: $\int {-1/(a-b)\over(x+a)}+{1/(a-b)\over x+b}dx={-1\over a-b}\int {1\over x+a}dx+{1\over a-b}\int{1\over x+b}dx$ and after integrating we get:
+
+${-1\over a-b}\ln{|x+a|}+{1\over a-b}\ln{|x+b|}=c_2-t$ where we have absorbed the constant from the left integration into the one on the right to create $c_2$.
+
+We now do some simplifying:
+
+$\ln|x+b|-\ln|x+a|=(a-b)(c_2-t) \Longrightarrow \ln|{x+b\over x+a}|=(a-b)(c_2-t)$ And we place both left hand side and right hand side in exponent of base $e$ to get:
+
+$|{x+b\over x+a}|=e^{(a-b)(c_2-t)}$ and we solve to get:
+
+${x+b\over x+a}=\pm e^{(a-b)(c_2-t)} \Longrightarrow {x+b\over x+a}=d e^{(a-b)(c_2-t)}$ where we have used $d$ to absorb that irritating $\pm$
+
+$x+b=(x+a)de^{(a-b)(c_2-t)}=xde^{(a-b)(c_2-t)}+ade^{(a-b)(c_2-t)}$
+
+$x-xde^{(a-b)(c_2-t)}=ade^{(a-b)(c_2-t)}-b$
+
+$x(1-de^{(a-b)(c_2-t)})=ade^{(a-b)(c_2-t)}-b$
+
+$x={ade^{(a-b)(c_2-t)}-b\over 1-de^{(a-b)(c_2-t)}}$
+
+Work on the constants
+
+$a-b={1+\sqrt{1-4h}\over 2}-{1-\sqrt{1-4h}\over 2}={1-1+\sqrt{1-4h}+\sqrt{1-4h}\over 2}=\sqrt{1-4h}$
+
+We also observe that: $b=a-\sqrt{1-4h}$
+
+Thus plugging these in we find:
+
+$x(t)={{(1+\sqrt{1-4h})\over 2}de^{\sqrt{1-4h}(c_2-t)}-{1+\sqrt{1-4h}\over 2}+\sqrt{1-4h}\over 1-de^{\sqrt{1-4h}(c_2-t)}}$ and after simplifying the fraction we find:
+
+$x(t)=[(1+\sqrt{1-4h})de^{\sqrt{1-4h}(c_2-t)}-1+\sqrt{1-4h}]/[ 2(1-de^{\sqrt{1-4h}(c_2-t)})]$
+
+Work on when we have imaginary roots...
+
+We now proceed to work on the equation when: $1-4h<0$
+
+We thus have two imaginary solutions: $x={1\pm i\sqrt{1-4h}\over 2}$ which we shall again refer to as: $a,b$. 
+
+We know though that there exists $c,d$ such that: $a=c+di$ and $b=c-di$ Our fraction in the left-hand integral thus becomes:
+
+${1\over (x+c+di)(x+c-di)}={1\over x^2+xc-xdi+xc+c^2-cdi+xdi+cdi+d^2}=1/(x^2+2xc+c^2+d^2)=1/((x+c)^2+d^2)$
+
+We thus now have this situation:
+
+$\int 1/((x+c)^2+d^2)dx = f-t$ where we have chosen $f$ to be our constant from the right-hand integration.
+
+We use a CAS to integrate the left-hand side.
+
+$\arctan({(x+c)/d})/d=g-t$ where we have absorbed the costant from left hand integration into $f$
+
+$\arctan((x+c)/d)=d(g-t)$
+
+$(x+c)/d=\tan(d(g-t))$
+
+$x+c=d\tan(d(g-t))$
+
+$x=d\tan(d(g-t))-c$ or in expanded form: ;)
+
+$x(t)=(\sqrt{1-4h}/2)\tan[(\sqrt{1-4h}/2)(g-t)]-1/2$ is our second final solution.
+
+Thus the general solution is:
+
+$x(t)=\begin{cases}
+[(1+\sqrt{1-4h})de^{\sqrt{1-4h}(c_2-t)}-1]/[ 2(1-de^{\sqrt{1-4h}(c_2-t)})] \textrm{ when } 1-4h>0 \\
+(\sqrt{1-4h}/2)\tan[(\sqrt{1-4h}/2)(g-t)]-1/2 \textrm{ when } 1-4h<0 \\
+\end{cases}$
+
+where $d=\pm 1$ and ${c_2,g,h}$ are constants to be determined.
+\end{document}
